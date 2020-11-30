@@ -6,7 +6,7 @@
 /*   By: kbraum <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 01:49:45 by kbraum            #+#    #+#             */
-/*   Updated: 2020/11/30 18:43:00 by kbraum           ###   ########.fr       */
+/*   Updated: 2020/11/30 21:28:52 by kbraum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(char const *s)
 	return (i);
 }
 
-char		*ft_strchr(char const *s, int c)
+char	*ft_strchr(char const *s, int c)
 {
 	size_t	i;
 	size_t	s_len;
