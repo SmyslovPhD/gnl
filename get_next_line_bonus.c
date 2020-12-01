@@ -6,7 +6,7 @@
 /*   By: kbraum <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 20:48:10 by kbraum            #+#    #+#             */
-/*   Updated: 2020/11/30 21:22:58 by kbraum           ###   ########.fr       */
+/*   Updated: 2020/12/01 20:28:18 by kbraum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,25 @@ static char	*find_buf(int fd, t_list_buf **list_buf)
 	elem->next = *list_buf;
 	*list_buf = elem;
 	return (elem->buf);
+}
+
+void		clean_buf(int fd, t_list_buf **list_buf)
+{
+	t_list_buf	*elem;
+	t_list_buf	*tmp;
+
+	elem = *list_buf;
+	tmp = 0;
+	while (elem->fd != fd)
+	{
+		tmp = elem;
+		elem = elem->next;
+	}
+	if (tmp)
+		tmp->next = elem->next;
+	else
+		*list_buf = elem->next;
+	free(elem);
 }
 
 static char	*check_next_line(char *buf, char **line)
@@ -76,5 +95,10 @@ int			get_next_line(int fd, char **line)
 		buf[n] = '\0';
 		buf_p = check_next_line(buf, line);
 	}
-	return (buf_p == 0 && n == 0 ? 0 : 1);
+	if (buf_p == 0 && n == 0)
+	{
+		clean_buf(fd, &list_buf);
+		return (0);
+	}
+	return (1);
 }
