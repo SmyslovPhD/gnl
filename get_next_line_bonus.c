@@ -6,7 +6,7 @@
 /*   By: kbraum <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 20:48:10 by kbraum            #+#    #+#             */
-/*   Updated: 2020/12/01 20:28:18 by kbraum           ###   ########.fr       */
+/*   Updated: 2020/12/01 22:31:47 by kbraum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*find_buf(int fd, t_list_buf **list_buf)
 	return (elem->buf);
 }
 
-void		clean_buf(int fd, t_list_buf **list_buf)
+static void	clean_buf(int fd, t_list_buf **list_buf)
 {
 	t_list_buf	*elem;
 	t_list_buf	*tmp;
@@ -89,6 +89,8 @@ int			get_next_line(int fd, char **line)
 	if ((n = read(fd, buf, 0)) < 0 || line == 0 || buf == 0)
 		return (-1);
 	*line = ft_strjoin("", "");
+	if (line == 0)
+		return (-1);
 	buf_p = check_next_line(buf, line);
 	while (buf_p == 0 && (n = read(fd, buf, BUFFER_SIZE)))
 	{
