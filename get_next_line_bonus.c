@@ -86,7 +86,7 @@ int			get_next_line(int fd, char **line)
 	int					n;
 
 	buf = find_buf(fd, &list_buf);
-	if ((n = read(fd, buf, 0)) < 0 || line == 0 || buf == 0)
+	if (BUFFER_SIZE < 0 || (n = read(fd, buf, 0)) < 0 || line == 0 || buf == 0)
 		return (-1);
 	*line = ft_strjoin("", "");
 	if (line == 0)

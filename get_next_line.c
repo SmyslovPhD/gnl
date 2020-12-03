@@ -44,7 +44,7 @@ int			get_next_line(int fd, char **line)
 	char		*buf_p;
 	int			n;
 
-	if ((n = read(fd, buf, 0)) < 0 || line == 0)
+	if (BUFFER_SIZE < 1 || (n = read(fd, buf, 0)) < 0 || line == 0)
 		return (-1);
 	*line = ft_strjoin("", "");
 	buf_p = check_next_line(buf, line);
