@@ -6,7 +6,7 @@
 /*   By: kbraum <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 20:48:10 by kbraum            #+#    #+#             */
-/*   Updated: 2020/11/30 20:03:18 by kbraum           ###   ########.fr       */
+/*   Updated: 2020/12/16 17:31:43 by kbraum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int			get_next_line(int fd, char **line)
 	{
 		buf[n] = '\0';
 		buf_p = check_next_line(buf, line);
+		if (*line == 0)
+			return (-1);
 	}
 	return (buf_p == 0 && n == 0 ? 0 : 1);
 }
